@@ -6,6 +6,7 @@ import Features from './components/home/Features';
 import Prices from './components/home/Prices';
 import Footer from './components/Footer';
 import Terms from './components/pages/Terms';
+import Lgpd from './components/pages/Lgpd';
 
 export function AppRoutes() {
   return (
@@ -33,6 +34,15 @@ export function AppRoutes() {
               <Footer />
             </>
           }
+        />
+
+        <Route path="/lgpd-notification" element={
+          <>
+            <Header />
+            <Lgpd />
+            <Footer />
+          </>
+        } 
         />
       </Routes>
     </Router>

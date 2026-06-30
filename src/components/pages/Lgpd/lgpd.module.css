@@ -1,0 +1,86 @@
+.lgpdContainer {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 56px 20px 72px;
+  color: var(--text-main);
+  background: #fff;
+}
+
+.backButton {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: var(--primary-blue);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.backButton:hover {
+  text-decoration: underline;
+}
+
+.lgpdHeader {
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.lgpdTitle {
+  font-size: 34px;
+  line-height: 1.25;
+  margin-bottom: 10px;
+  color: var(--text-main);
+}
+
+.lgpdSubtitle {
+  color: var(--text-light);
+  font-size: 15px;
+}
+
+.lgpdIntro {
+  background: var(--bg-light);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 26px;
+  margin-bottom: 34px;
+}
+
+.lgpdIntro p,
+.lgpdSection p,
+.signatureBlock p {
+  line-height: 1.8;
+  margin-bottom: 14px;
+  text-align: justify;
+}
+
+.lgpdSection {
+  margin-bottom: 30px;
+}
+
+.lgpdSection h2 {
+  color: var(--primary-blue);
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.lgpdSection ul {
+  margin-left: 22px;
+}
+
+.lgpdSection li {
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+
+.highlightBox {
+  margin: 16px 0;
+  padding: 20px;
+  border-left: 4px solid var(--primary-blue);
+  background: #f8fbff;
+  border-radius: 8px;
+}
+
+.signatureBlock {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
