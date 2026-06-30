@@ -55,6 +55,7 @@ const features = [
 ];
 
 export default function Features() {
+    
   const [openIndex, setOpenIndex] = useState(null);
 
   const handleToggle = (index) => {
