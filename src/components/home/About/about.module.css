@@ -1,0 +1,49 @@
+.aboutContainer {
+  padding: 80px 0;
+  background: #fff;
+}
+
+.aboutContent {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.aboutTitle {
+  font-size: 38px;
+  color: #1e293b;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.AboutText {
+  font-size: 22px;
+  color: #64748b;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.statNumbers{
+    display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.statItem {
+  padding: 20px;
+}
+
+.statNum {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--primary-blue);
+  margin-bottom: 10px;
+}
+
+.statLabel {
+  font-size: 16px;
+  color: var(--text-light);
+  font-weight: 600;
+}

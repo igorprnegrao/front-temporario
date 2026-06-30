@@ -1,0 +1,122 @@
+.pricing {
+  padding: 80px 0;
+  background: #fff;
+}
+
+.pricesContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.priceTitle {
+  font-size: 38px;
+  color: #1e293b;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.pricingGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.pricingCard {
+  background: #f8fafc;
+  padding: 40px 30px;
+  border-radius: 16px;
+  border: 2px solid #e2e8f0;
+  text-align: center;
+  position: relative;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.pricingCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.featured {
+  border-color: #2563eb;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.15);
+}
+
+.badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2563eb;
+  color: white;
+  padding: 6px 20px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pricingCard h3 {
+  font-size: 24px;
+  color: #1e293b;
+  margin-bottom: 20px;
+}
+
+.price {
+  font-size: 42px;
+  font-weight: 700;
+  color: #2563eb;
+  margin-bottom: 30px;
+}
+
+.price span {
+  font-size: 18px;
+  font-weight: 400;
+  color: #64748b;
+}
+
+.pricingFeatures {
+  list-style: none;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.pricingFeatures li {
+  padding: 12px 0;
+  color: #64748b;
+  font-size: 15px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.pricingFeatures li:last-child {
+  border-bottom: none;
+}
+
+.pricingFeatures li::before {
+  content: "✓";
+  color: #10b981;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.priceButton {
+  display: inline-block;
+  padding: 16px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s;
+  font-size: 16px;
+  background: #2563eb;
+  color: white;
+  text-decoration: none;
+}
+
+.priceButton:hover {
+  background: #047f58;
+  transform: translateY(-1px);
+}

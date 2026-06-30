@@ -1,0 +1,67 @@
+.featuresContainer {
+  padding: 80px 0;
+  background: var(--bg-light);
+}
+
+.featureTitle {
+  font-size: 36px;
+  color: #1e293b;
+  margin-bottom: 30px;
+  margin-top: 0;
+  text-align: center;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.featureCard {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  text-align: center;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.featureIcon {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 20px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.featureCard:hover .featureIcon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.featureIcon i {
+  font-size: 42px;
+  color: white;
+}
+
+.featureCard h3 {
+  margin-bottom: 15px;
+  color: var(--primary-blue);
+  font-size: 18px;
+}
+.featureCard p {
+  color: var(--text-light);
+  font-size: 14px;
+  line-height: 1.6;
+}
