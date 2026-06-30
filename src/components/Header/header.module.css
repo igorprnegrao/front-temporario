@@ -1,9 +1,11 @@
 .headerContainer {
   background: #fff;
   border-bottom: 1px solid #e2e8f0;
-  padding: 15px auto;
+  padding: 10px 0;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,8 +20,8 @@
   color: #1e293b;
   font-size: 16px;
   text-decoration: none;
-  height: 100px;
-  width: auto;
+  width: min(240px, 52vw);
+  height: auto;
   object-fit: contain;
   padding-left: 20px;
 }
@@ -29,6 +31,28 @@
   align-items: center;
   gap: 15px;
   padding-right: 30px;
+}
+
+.menuButton {
+  display: none;
+  margin-right: 20px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #dbe2ea;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.menuLine {
+  width: 20px;
+  height: 2px;
+  background: #1e293b;
+  border-radius: 2px;
 }
 
 .navLink {
@@ -41,7 +65,7 @@
   transition: all 0.3s ease;
   position: relative;
   font-size: 1rem;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .navLink:hover {
@@ -71,4 +95,43 @@
   background: #059669;
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+}
+
+@media (max-width: 900px) {
+  .logo {
+    width: min(170px, 46vw);
+    padding-left: 12px;
+  }
+
+  .menuButton {
+    display: flex;
+  }
+
+  .navContainer {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 14px 16px 20px;
+    background: #fff;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 12px 22px rgba(15, 23, 42, 0.09);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    z-index: 110;
+  }
+
+  .navOpen {
+    display: flex;
+  }
+
+  .navLink,
+  .navLogin {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 1rem;
+  }
 }

@@ -1,6 +1,17 @@
+import { useState } from "react";
 import styles from "./header.module.css";
 
 export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleToggleMenu = () => {
+    setMenuOpen((prev) => !prev);
+  };
+
+  const handleCloseMenu = () => {
+    setMenuOpen(false);
+  };
+
   return (
     <>
       <header className={styles.headerContainer}>
@@ -9,23 +20,48 @@ export default function Header() {
           alt="logo polbase"
           className={styles.logo}
         />
-        <nav className={styles.navContainer}>
-          <a href="/#home" className={styles.navLink}>
+        <button
+          type="button"
+          className={styles.menuButton}
+          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={menuOpen}
+          onClick={handleToggleMenu}
+        >
+          <span className={styles.menuLine}></span>
+          <span className={styles.menuLine}></span>
+          <span className={styles.menuLine}></span>
+        </button>
+        <nav
+          className={`${styles.navContainer} ${menuOpen ? styles.navOpen : ""}`}
+        >
+          <a href="/#home" className={styles.navLink} onClick={handleCloseMenu}>
             Home
           </a>
-          <a href="/#about" className={styles.navLink}>
+          <a
+            href="/#about"
+            className={styles.navLink}
+            onClick={handleCloseMenu}
+          >
             Sobre nós
           </a>
-          <a href="/#features" className={styles.navLink}>
+          <a
+            href="/#features"
+            className={styles.navLink}
+            onClick={handleCloseMenu}
+          >
             Funcionalidades
           </a>
-          <a href="/#pricing" className={styles.navLink}>
+          <a
+            href="/#pricing"
+            className={styles.navLink}
+            onClick={handleCloseMenu}
+          >
             Planos
           </a>
-          <a href="#" className={styles.navLogin}>
+          <a href="#" className={styles.navLogin} onClick={handleCloseMenu}>
             Login
           </a>
-          <a href="#" className={styles.navLink}>
+          <a href="#" className={styles.navLink} onClick={handleCloseMenu}>
             Cadastre-se
           </a>
         </nav>

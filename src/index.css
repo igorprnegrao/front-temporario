@@ -9,6 +9,24 @@
   font-family: "Inter", sans-serif;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  min-width: 320px;
 }

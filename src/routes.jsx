@@ -7,6 +7,7 @@ import Prices from './components/home/Prices';
 import Footer from './components/Footer';
 import Terms from './components/pages/Terms';
 import Lgpd from './components/pages/Lgpd';
+import Cookies from './components/pages/Cookies';
 
 export function AppRoutes() {
   return (
@@ -43,6 +44,15 @@ export function AppRoutes() {
             <Footer />
           </>
         } 
+        />
+
+        <Route path="/cookies-policy" element={
+          <>
+            <Header />
+            <Cookies />
+            <Footer />
+          </>
+        }
         />
       </Routes>
     </Router>

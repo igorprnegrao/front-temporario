@@ -74,7 +74,7 @@ export default function Footer() {
                 <a href="/lgpd-notification">LGPD</a>
               </li>
               <li>
-                <a href="#">Cookies</a>
+                <a href="/cookies-policy">Cookies</a>
               </li>
             </ul>
           </div>
