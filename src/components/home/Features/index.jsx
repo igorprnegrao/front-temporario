@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./features.module.css";
 
 const features = [
@@ -54,6 +55,12 @@ const features = [
 ];
 
 export default function Features() {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const handleToggle = (index) => {
+    setOpenIndex((prev) => (prev === index ? null : index));
+  };
+
   return (
     <>
       <link
@@ -68,15 +75,34 @@ export default function Features() {
         <div className={styles.featuresContent}>
           <h2 className={styles.featureTitle}>Funcionalidades</h2>
           <div className={styles.featuresGrid}>
-            {features.map((feature) => (
-              <div className={styles.featureCard} key={feature.title}>
-                <div className={styles.featureIcon}>
-                  <i className={`fas ${feature.icon}`}></i>
-                </div>
-                <h3>{feature.title}</h3>
-                <p>{feature.desc}</p>
-              </div>
-            ))}
+            {features.map((feature, index) => {
+              const isOpen = openIndex === index;
+
+              return (
+                <button
+                  type="button"
+                  className={`${styles.featureCard} ${isOpen ? styles.featureCardOpen : styles.featureCardClosed}`}
+                  key={feature.title}
+                  onClick={() => handleToggle(index)}
+                  aria-expanded={isOpen}
+                >
+                  <div className={styles.featureCardHeader}>
+                    <div className={styles.featureLead}>
+                      <div className={styles.featureIcon}>
+                        <i className={`fas ${feature.icon}`}></i>
+                      </div>
+                      <h3 className={styles.featureCardTitle}>{feature.title}</h3>
+                    </div>
+                    <span className={styles.featureToggle}>{isOpen ? "−" : "+"}</span>
+                  </div>
+                  <div
+                    className={`${styles.featureBody} ${isOpen ? styles.featureBodyOpen : ""}`}
+                  >
+                    <p>{feature.desc}</p>
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>

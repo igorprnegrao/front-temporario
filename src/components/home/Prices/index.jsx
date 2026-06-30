@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./prices.module.css";
 import { Link } from "react-router-dom";
 
@@ -73,33 +74,55 @@ const plans = [
 ];
 
 export default function Prices() {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const handleToggleFeatures = (index) => {
+    setOpenIndex((prev) => (prev === index ? null : index));
+  };
+
   return (
     <>
       <section id="pricing" className={styles.pricing}>
         <div className={styles.pricesContent}>
           <h2 className={styles.priceTitle}>Planos e Preços</h2>
           <div className={styles.pricingGrid}>
-            {plans.map((plan) => (
-              <div
-                className={`${styles.pricingCard}${plan.featured ? ` ${styles.featured}` : ""}`}
-                key={plan.name}
-              >
-                {plan.badge && <div className={styles.badge}>{plan.badge}</div>}
-                <h3>{plan.name}</h3>
-                <p className={styles.price}>
-                  {plan.price}
-                  <span>/mês</span>
-                </p>
-                <ul className={styles.pricingFeatures}>
-                  {plan.features.map((f) => (
-                    <li key={f}>{f}</li>
-                  ))}
-                </ul>
-                <Link to="/cadastro" className={styles.priceButton}>
-                  {plan.button}
-                </Link>
-              </div>
-            ))}
+            {plans.map((plan, index) => {
+              const isOpen = openIndex === index;
+
+              return (
+                <div
+                  className={`${styles.pricingCard}${plan.featured ? ` ${styles.featured}` : ""}`}
+                  key={plan.name}
+                >
+                  {plan.badge && <div className={styles.badge}>{plan.badge}</div>}
+                  <h3>{plan.name}</h3>
+                  <p className={styles.price}>
+                    {plan.price}
+                    <span>/mês</span>
+                  </p>
+
+                  <button
+                    type="button"
+                    className={styles.featuresToggle}
+                    onClick={() => handleToggleFeatures(index)}
+                    aria-expanded={isOpen}
+                  >
+                    {isOpen ? "Ocultar recursos −" : "Ver recursos +"}
+                  </button>
+
+                  <ul
+                    className={`${styles.pricingFeatures} ${isOpen ? styles.pricingFeaturesOpen : ""}`}
+                  >
+                    {plan.features.map((f) => (
+                      <li key={f}>{f}</li>
+                    ))}
+                  </ul>
+                  <Link to="/cadastro" className={styles.priceButton}>
+                    {plan.button}
+                  </Link>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

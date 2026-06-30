@@ -47,3 +47,14 @@
   color: var(--text-light);
   font-weight: 600;
 }
+
+@media (max-width: 768px) {
+  .statNumbers {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .statItem:last-child {
+    grid-column: 1 / -1;
+  }
+}

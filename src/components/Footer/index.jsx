@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./footer.module.css";
 
 const socialLinks = [
@@ -8,6 +9,12 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const [openSection, setOpenSection] = useState(null);
+
+  const handleToggleSection = (sectionKey) => {
+    setOpenSection((prev) => (prev === sectionKey ? null : sectionKey));
+  };
+
   return (
     <>
       <link
@@ -41,8 +48,20 @@ export default function Footer() {
           </div>
 
           <div className={styles.footerSection}>
-            <h4>Links Rápidos</h4>
-            <ul className={styles.footerLinks}>
+            <button
+              type="button"
+              className={styles.footerSectionToggle}
+              onClick={() => handleToggleSection("quick")}
+              aria-expanded={openSection === "quick"}
+            >
+              <span>Links Rápidos</span>
+              <span className={styles.toggleIcon}>
+                {openSection === "quick" ? "−" : "+"}
+              </span>
+            </button>
+            <ul
+              className={`${styles.footerLinks} ${openSection === "quick" ? styles.footerLinksOpen : ""}`}
+            >
               <li>
                 <a href="/#about">Sobre Nós</a>
               </li>
@@ -62,8 +81,20 @@ export default function Footer() {
           </div>
 
           <div className={styles.footerSection}>
-            <h4>Legal</h4>
-            <ul className={styles.footerLinks}>
+            <button
+              type="button"
+              className={styles.footerSectionToggle}
+              onClick={() => handleToggleSection("legal")}
+              aria-expanded={openSection === "legal"}
+            >
+              <span>Legal</span>
+              <span className={styles.toggleIcon}>
+                {openSection === "legal" ? "−" : "+"}
+              </span>
+            </button>
+            <ul
+              className={`${styles.footerLinks} ${openSection === "legal" ? styles.footerLinksOpen : ""}`}
+            >
               <li>
                 <a href="/terms-of-use">Termos de Uso e Condições</a>
               </li>
