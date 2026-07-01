@@ -6,6 +6,8 @@ import styles from "./geral.module.css";
 
 export default function Geral() {
   const [uuid, setUuid] = useState("");
+  const [userName, setUserName] = useState("");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [eleitoresCadastrados, setEleitoresCadastrados] = useState(null);
   const [limiteEleitores, setLimiteEleitores] = useState(null);
   const [planoStatus, setPlanoStatus] = useState("Carregando...");
@@ -80,6 +82,45 @@ export default function Geral() {
     return null;
   };
 
+  const resolveFirstName = (value) => {
+    if (!value) return "";
+
+    if (typeof value === "string") {
+      return value.trim().split(/\s+/).filter(Boolean)[0] || "";
+    }
+
+    if (Array.isArray(value)) {
+      for (const item of value) {
+        const resolved = resolveFirstName(item);
+        if (resolved) return resolved;
+      }
+      return "";
+    }
+
+    if (typeof value === "object") {
+      const directKeys = ["primeiroNome", "firstName", "nome", "name"];
+
+      for (const key of directKeys) {
+        const resolved = resolveFirstName(value[key]);
+        if (resolved) return resolved;
+      }
+
+      for (const nestedValue of Object.values(value)) {
+        const resolved = resolveFirstName(nestedValue);
+        if (resolved) return resolved;
+      }
+    }
+
+    return "";
+  };
+
+  const resolveInitials = (value) => {
+    const resolvedName = resolveFirstName(value);
+    if (!resolvedName) return "??";
+
+    return resolvedName.slice(0, 2).toUpperCase();
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (!token) {
@@ -104,6 +145,27 @@ export default function Geral() {
     setUuid(masterUserId);
 
     const headers = { Authorization: `Bearer ${token}` };
+
+    fetch("http://localhost:8080/politico/meus-dados", {
+      headers,
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}`);
+        }
+
+        return res.json();
+      })
+      .then((data) => {
+        const firstName = resolveFirstName(data);
+
+        if (firstName) {
+          setUserName(firstName);
+        }
+      })
+      .catch(() => {
+        setUserName("");
+      });
 
     fetch(`http://localhost:8080/politico/${masterUserId}/plano/status`, {
       headers,
@@ -302,12 +364,48 @@ export default function Geral() {
     PLATINA: "Plano Platina",
   };
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (!element) return;
+
+    element.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div className={styles.dashboardRoot}>
-      <MenuLateral masterUserId={uuid} />
+      <MenuLateral
+        masterUserId={uuid}
+        isMobileMenuOpen={isMobileMenuOpen}
+        setIsMobileMenuOpen={setIsMobileMenuOpen}
+      />
 
-      <main className={styles.dashboardMain}>
-        <header className={styles.pageHeader}>
+      <main className={styles.dashboardMain} id="topo">
+        <div className={styles.mobileTopBar}>
+          <div className={styles.mobileBrand}>
+            <span className={styles.mobileBrandIcon}>🏛️</span>
+            <span>PoliticBase V3</span>
+          </div>
+
+          <div className={styles.mobileProfile}>
+            <div className={styles.mobileProfileBadge}>
+              {resolveInitials(userName || uuid)}
+            </div>
+            <div className={styles.mobileProfileText}>
+              <span>{userName || "Carregando..."}</span>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.mobileSearchWrap}>
+          <input
+            className={styles.mobileSearch}
+            type="search"
+            placeholder="Search ..."
+            aria-label="Pesquisar no dashboard"
+          />
+        </div>
+
+        <header className={styles.pageHeader} id="visao-geral">
           <div className={styles.headerTitle}>
             <h1>Visão Geral</h1>
             <p>Bem-vindo ao painel de controle do gabinete.</p>
@@ -321,7 +419,7 @@ export default function Geral() {
           </div>
         </header>
 
-        <section className={styles.statsGrid}>
+        <section className={styles.statsGrid} id="eleitores">
           <div className={styles.card}>
             <div className={styles.cardHeader}>Eleitores Cadastrados 👥</div>
             <div className={styles.cardValue}>
@@ -381,7 +479,7 @@ export default function Geral() {
             <div className={styles.cardCaption}>Total cadastrado</div>
           </div>
 
-          <div className={styles.card}>
+          <div className={styles.card} id="demandas">
             <div className={styles.cardHeader}>Demandas Pendentes 📋</div>
             <div className={styles.cardValue}>
               {totalDemandasPendentes !== null ? totalDemandasPendentes : "..."}
@@ -396,7 +494,7 @@ export default function Geral() {
           </div>
         </section>
 
-        <section className={styles.chartsGrid}>
+        <section className={styles.chartsGrid} id="mais">
           <div className={styles.chartCard}>
             <h3>Status da Assinatura</h3>
             <div className={styles.statusBox}>
@@ -427,7 +525,12 @@ export default function Geral() {
                           : 0;
 
                       return (
-                        <div className={styles.rankingItem} key={assessor.nome}>
+                        <div
+                          className={`${styles.rankingItem} ${
+                            index >= 3 ? styles.rankingItemCompact : ""
+                          }`}
+                          key={assessor.nome}
+                        >
                           <div className={styles.rankingPosition}>
                             {index + 1}º
                           </div>
@@ -544,6 +647,44 @@ export default function Geral() {
             </div>
           </div>
         </section>
+
+        <nav className={styles.mobileBottomNav} aria-label="Navegação inferior">
+          <button
+            type="button"
+            className={styles.mobileBottomNavItem}
+            onClick={() => scrollToSection("topo")}
+          >
+            <span className={styles.mobileBottomNavIcon}>🏠</span>
+            <span className={styles.mobileBottomNavLabel}>Visão Geral</span>
+          </button>
+
+          <button
+            type="button"
+            className={styles.mobileBottomNavItem}
+            onClick={() => scrollToSection("eleitores")}
+          >
+            <span className={styles.mobileBottomNavIcon}>👥</span>
+            <span className={styles.mobileBottomNavLabel}>Eleitores</span>
+          </button>
+
+          <button
+            type="button"
+            className={styles.mobileBottomNavItem}
+            onClick={() => scrollToSection("demandas")}
+          >
+            <span className={styles.mobileBottomNavIcon}>📄</span>
+            <span className={styles.mobileBottomNavLabel}>Demandas</span>
+          </button>
+
+          <button
+            type="button"
+            className={styles.mobileBottomNavItem}
+            onClick={() => setIsMobileMenuOpen((current) => !current)}
+          >
+            <span className={styles.mobileBottomNavIcon}>⚙️</span>
+            <span className={styles.mobileBottomNavLabel}>Mais</span>
+          </button>
+        </nav>
       </main>
     </div>
   );

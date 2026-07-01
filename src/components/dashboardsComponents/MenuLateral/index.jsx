@@ -3,7 +3,11 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./menuLateral.module.css";
 
-export default function MenuLateral({ masterUserId }) {
+export default function MenuLateral({
+  masterUserId,
+  isMobileMenuOpen,
+  setIsMobileMenuOpen,
+}) {
   const [openMenus, setOpenMenus] = useState({
     eleitores: false,
     acoesSociais: false,
@@ -12,6 +16,9 @@ export default function MenuLateral({ masterUserId }) {
   const [userRole, setUserRole] = useState("Carregando...");
   const [isLoadingUserName, setIsLoadingUserName] = useState(true);
   const navigate = useNavigate();
+
+  const mobileMenuOpen = isMobileMenuOpen ?? false;
+  const setMobileMenuOpen = setIsMobileMenuOpen ?? (() => {});
 
   const resolveFirstName = (value) => {
     if (!value) return "";
@@ -153,113 +160,177 @@ export default function MenuLateral({ masterUserId }) {
     }).finally(() => {
       localStorage.removeItem("authToken");
       navigate("/");
+      setMobileMenuOpen(false);
     });
   };
 
+  const closeMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
-    <aside className={styles.dashboardSidebar}>
-      <div className={styles.logo}>🏛️ PoliticBase V3</div>
+    <>
+      <button
+        type="button"
+        className={styles.mobileMenuButton}
+        onClick={() => setMobileMenuOpen((current) => !current)}
+        aria-label="Abrir menu lateral"
+        aria-expanded={mobileMenuOpen}
+      >
+        ☰
+      </button>
 
-      <nav className={styles.navigation}>
-        <ul>
-          <li className={styles.active}>📊 Visão Geral</li>
+      {mobileMenuOpen && (
+        <button
+          type="button"
+          className={styles.mobileBackdrop}
+          aria-label="Fechar menu lateral"
+          onClick={closeMenu}
+        />
+      )}
 
-          <li>
-            <Link to={`/master-users/${masterUserId}/dashboard/aba-assessores`}>
-              👥 Assessores
-            </Link>
-          </li>
+      <aside
+        className={`${styles.dashboardSidebar} ${
+          mobileMenuOpen ? styles.sidebarOpen : ""
+        }`}
+      >
+        <div className={styles.logo}>🏛️ PoliticBase V3</div>
 
-          <li
-            className={`${styles.hasSubmenu} ${openMenus.eleitores ? styles.open : ""}`}
-          >
-            <button
-              type="button"
-              className={styles.menuItem}
-              onClick={() => toggleMenu("eleitores")}
+        <nav className={styles.navigation}>
+          <ul>
+            <li className={styles.active} onClick={closeMenu}>
+              <Link
+                to={
+                  masterUserId ? `/master-users/${masterUserId}/dashboard` : "#"
+                }
+                onClick={closeMenu}
+              >
+                📊 Visão Geral
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to={`/master-users/${masterUserId}/dashboard/aba-assessores`}
+                onClick={closeMenu}
+              >
+                👥 Assessores
+              </Link>
+            </li>
+
+            <li
+              className={`${styles.hasSubmenu} ${openMenus.eleitores ? styles.open : ""}`}
             >
-              <span>👤 Eleitores</span>
-              <span className={styles.submenuArrow}>▶</span>
-            </button>
-            <ul className={styles.submenu}>
-              <li>
-                <a href="#">📋 Dashboard</a>
-              </li>
-              <li>
-                <a href="#">📄 Lista Completa</a>
-              </li>
-            </ul>
-          </li>
+              <button
+                type="button"
+                className={styles.menuItem}
+                onClick={() => toggleMenu("eleitores")}
+              >
+                <span>👤 Eleitores</span>
+                <span className={styles.submenuArrow}>▶</span>
+              </button>
+              <ul className={styles.submenu}>
+                <li>
+                  <a href="#" onClick={closeMenu}>
+                    📋 Painel Eleitor
+                  </a>
+                </li>
+                <li>
+                  <a href="#" onClick={closeMenu}>
+                    📄 Lista Completa
+                  </a>
+                </li>
+              </ul>
+            </li>
 
-          <li>
-            <a href="#">📝 Demandas</a>
-          </li>
+            <li>
+              <a href="#" onClick={closeMenu}>
+                📝 Demandas
+              </a>
+            </li>
 
-          <li
-            className={`${styles.hasSubmenu} ${openMenus.acoesSociais ? styles.open : ""}`}
-          >
-            <button
-              type="button"
-              className={styles.menuItem}
-              onClick={() => toggleMenu("acoesSociais")}
+            <li
+              className={`${styles.hasSubmenu} ${openMenus.acoesSociais ? styles.open : ""}`}
             >
-              <span>🌱 Ações Sociais</span>
-              <span className={styles.submenuArrow}>▶</span>
-            </button>
-            <ul className={styles.submenu}>
-              <li>
-                <a href="#">📋 Dashboard</a>
-              </li>
-              <li>
-                <a href="#">📄 Lista Completa</a>
-              </li>
-              <li>
-                <a href="#">🏥 Atendimento Social</a>
-              </li>
-            </ul>
-          </li>
+              <button
+                type="button"
+                className={styles.menuItem}
+                onClick={() => toggleMenu("acoesSociais")}
+              >
+                <span>🌱 Ações Sociais</span>
+                <span className={styles.submenuArrow}>▶</span>
+              </button>
+              <ul className={styles.submenu}>
+                <li>
+                  <a href="#" onClick={closeMenu}>
+                    📋 Dashboard
+                  </a>
+                </li>
+                <li>
+                  <a href="#" onClick={closeMenu}>
+                    📄 Lista Completa
+                  </a>
+                </li>
+                <li>
+                  <a href="#" onClick={closeMenu}>
+                    🏥 Atendimento Social
+                  </a>
+                </li>
+              </ul>
+            </li>
 
-          <li>
-            <a href="#">📅 Agenda</a>
-          </li>
+            <li>
+              <a href="#" onClick={closeMenu}>
+                📅 Agenda
+              </a>
+            </li>
 
-          <li>📄 Relatórios</li>
+            <li>📄 Relatórios</li>
 
-          <li>
-            <a href="#">📬 Notificações</a>
-          </li>
+            <li>
+              <a href="#" onClick={closeMenu}>
+                📬 Notificações
+              </a>
+            </li>
 
-          <li>
-            <a href="#">💳 Pagamentos</a>
-          </li>
+            <li>
+              <a href="#" onClick={closeMenu}>
+                💳 Pagamentos
+              </a>
+            </li>
 
-          <li>
-            <a href="#">🆔 Meus Dados</a>
-          </li>
+            <li>
+              <a href="#" onClick={closeMenu}>
+                🆔 Meus Dados
+              </a>
+            </li>
 
-          <li>
-            <a href="#">⚙️ Configurações</a>
-          </li>
-        </ul>
-      </nav>
+            <li>
+              <a href="#" onClick={closeMenu}>
+                ⚙️ Configurações
+              </a>
+            </li>
+          </ul>
+        </nav>
 
-      <div className={styles.userFooter}>
-        <div className={styles.userInfo}>
-          <div className={styles.avatar}>
-            {isLoadingUserName ? "..." : resolveAvatarText(userName)}
-          </div>
-          <div>
-            <div className={styles.userName}>
-              {userName || (isLoadingUserName ? "Carregando..." : "Usuário")}
+        <div className={styles.userFooter}>
+          <div className={styles.userInfo}>
+            <div className={styles.avatar}>
+              {isLoadingUserName ? "..." : resolveAvatarText(userName)}
             </div>
-            <div className={styles.userRole}>{userRole}</div>
+            <div>
+              <div className={styles.userName}>
+                {userName || (isLoadingUserName ? "Carregando..." : "Usuário")}
+              </div>
+              <div className={styles.userRole}>{userRole}</div>
+            </div>
           </div>
-        </div>
 
-        <a href="/" className={styles.logout} onClick={handleLogout}>
-          ↩ Sair do Sistema
-        </a>
-      </div>
-    </aside>
+          <a href="/" className={styles.logout} onClick={handleLogout}>
+            ↩ Sair do Sistema
+          </a>
+        </div>
+      </aside>
+    </>
   );
 }

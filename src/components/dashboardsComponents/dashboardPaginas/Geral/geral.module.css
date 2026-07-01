@@ -12,6 +12,18 @@
   min-width: 0;
 }
 
+.mobileTopBar {
+  display: none;
+}
+
+.mobileSearchWrap {
+  display: none;
+}
+
+.mobileSearch {
+  display: none;
+}
+
 .pageHeader {
   display: flex;
   justify-content: space-between;
@@ -125,6 +137,10 @@
   border-radius: 12px;
   border: 1px solid #e2e8f0;
   min-height: 350px;
+}
+
+.mobileBottomNav {
+  display: none;
 }
 
 .chartCard h3 {
@@ -360,27 +376,261 @@
 
   .dashboardMain {
     margin-left: 0;
+    padding-top: 112px;
+  }
+
+  .mobileTopBar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #e2e8f0;
+    position: fixed;
+    min-height: 84px;
+  }
+
+  .mobileBrand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    color: #6b21a8;
+    font-size: 16px;
+    white-space: nowrap;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+
+  .mobileBrandIcon {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3e8ff;
+    color: #6b21a8;
+  }
+
+  .mobileProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 72px;
+    margin-left: auto;
+    z-index: 1;
+  }
+
+  .mobileProfileBadge {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #eef2ff;
+    color: #4f46e5;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .mobileProfileText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.05;
+    font-size: 12px;
+    font-weight: 700;
+    color: #64748b;
+    min-width: 0;
+  }
+
+  .mobileProfileText span {
+    display: block;
+    max-width: 104px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+  }
+
+  .mobileSearchWrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 2px;
+    margin-bottom: 14px;
+  }
+
+  .mobileSearch {
+    flex: 1;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 14px;
+    outline: none;
+    background: #fff;
+    color: #1e293b;
+  }
+
+  .mobileSearch::placeholder {
+    color: #94a3b8;
   }
 
   .pageHeader {
     flex-direction: column;
     align-items: stretch;
+    gap: 14px;
+    margin-bottom: 20px;
   }
 
   .headerBadges {
     justify-content: flex-start;
   }
+
+  .headerBadges {
+    display: none;
+  }
+
+  .chartsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .chartsGrid > .chartCard {
+    order: 0;
+  }
+
+  .chartsGrid > .chartCard:nth-child(2) {
+    order: -1;
+    grid-column: 1 / -1;
+  }
+
+  .chartCard {
+    min-height: auto;
+    padding: 18px;
+  }
+
+  .rankingWrapper {
+    margin-top: 18px;
+    padding-top: 16px;
+  }
+
+  .dashboardMain {
+    padding-bottom: 112px;
+  }
+
+  .mobileBottomNav {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 30;
+    background: rgba(255, 255, 255, 0.98);
+    border-top: 1px solid #e2e8f0;
+    box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.08);
+    padding: 10px 8px 12px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+
+  .mobileBottomNavItem {
+    border: none;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: #64748b;
+    font: inherit;
+    padding: 4px 2px;
+    min-width: 0;
+  }
+
+  .mobileBottomNavIcon {
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .mobileBottomNavLabel {
+    font-size: 11px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .mobileBottomNavItem:first-child {
+    color: #2563eb;
+  }
 }
 
 @media (max-width: 720px) {
   .dashboardMain {
-    padding: 18px 16px 28px;
+    padding: 78px 16px 124px;
   }
 
   .statsGrid,
-  .statsGridTwo,
   .chartsGrid {
     grid-template-columns: 1fr;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .chartsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .chartsGrid > .chartCard {
+    order: 0;
+  }
+
+  .chartsGrid > .chartCard:nth-child(2) {
+    order: -1;
+    grid-column: 1 / -1;
+  }
+
+  .statsGridTwo {
+    grid-template-columns: 1fr;
+  }
+
+  .chartCard {
+    min-height: auto;
+    padding: 16px;
+  }
+
+  .rankingWrapper {
+    margin-top: 14px;
+    padding-top: 14px;
+  }
+
+  .pageHeader {
+    margin-bottom: 18px;
+  }
+
+  .headerTitle h1 {
+    font-size: 22px;
+  }
+
+  .headerTitle p {
+    font-size: 13px;
   }
 
   .cardValue {
@@ -389,5 +639,93 @@
 
   .chartCard {
     padding: 18px;
+  }
+
+  .chartCard,
+  .card {
+    border-radius: 14px;
+  }
+
+  .chartCard h3 {
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+
+  .sectionTitle {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+
+  .statusLabel,
+  .statLabel,
+  .planRow,
+  .statTrend {
+    font-size: 10px;
+  }
+
+  .statusValue,
+  .statValue {
+    font-size: 18px;
+    margin: 6px 0 14px;
+  }
+
+  .planRow {
+    margin-bottom: 8px;
+  }
+
+  .rankingPosition,
+  .rankingName,
+  .rankingValue {
+    font-size: 12px;
+  }
+
+  .rankingItem {
+    gap: 10px;
+    padding: 8px;
+  }
+
+  .rankingItem:nth-child(4),
+  .rankingItem:nth-child(5) {
+    display: none;
+  }
+
+  .rankingItemCompact {
+    padding: 4px 8px;
+    gap: 6px;
+    opacity: 0.42;
+    max-height: 22px;
+    overflow: hidden;
+  }
+
+  .rankingItemCompact .rankingBar {
+    display: none;
+  }
+
+  .rankingItemCompact .rankingName {
+    margin-bottom: 0;
+    font-size: 11px;
+    line-height: 1;
+  }
+
+  .rankingItemCompact .rankingValue {
+    font-size: 11px;
+    min-width: 28px;
+    line-height: 1;
+  }
+
+  .rankingItemCompact .rankingPosition {
+    font-size: 11px;
+    min-width: 22px;
+    line-height: 1;
+  }
+
+  .rankingItemCompact .rankingInfo {
+    display: flex;
+    align-items: center;
+  }
+
+  .rankingWrapper {
+    margin-top: 12px;
+    padding-top: 12px;
   }
 }

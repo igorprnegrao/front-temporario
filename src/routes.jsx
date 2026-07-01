@@ -12,6 +12,7 @@ import Cadastro from "./components/pages/Cadastro";
 import Login from "./components/pages/Login";
 import MenuLateral from "./components/dashboardsComponents/MenuLateral";
 import Geral from "./components/dashboardsComponents/dashboardPaginas/Geral";
+import AssessoresPainel from "./components/dashboardsComponents/dashboardPaginas/AssessoresPainel";
 
 export function AppRoutes() {
   return (
@@ -66,6 +67,10 @@ export function AppRoutes() {
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/login" element={<Login />} />
         <Route path="/master-users/:id/dashboard" element={<Geral />} />
+        <Route
+          path="/master-users/:id/dashboard/aba-assessores"
+          element={<AssessoresPainel />}
+        />
         <Route
           path="/menu-lateral-preview"
           element={

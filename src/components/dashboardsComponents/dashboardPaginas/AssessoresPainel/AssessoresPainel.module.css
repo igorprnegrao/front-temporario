@@ -1,0 +1,396 @@
+.dashboardRoot {
+  display: flex;
+  background: #f8fafc;
+  min-height: 100vh;
+  color: #1e293b;
+}
+
+.dashboardMain {
+  flex: 1;
+  margin-left: 260px;
+  padding: 32px;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.subtitle {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btnNew {
+  border: none;
+  background: #2563eb;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dateBadge {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  border-radius: 8px;
+  font-size: 12px;
+  padding: 8px 12px;
+  text-transform: capitalize;
+}
+
+.filterSection {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.filterLabel {
+  grid-column: span 1;
+  align-self: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.nameFilterInput,
+.selectFilter {
+  grid-column: span 1;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  height: 38px;
+  font-size: 13px;
+  padding: 0 12px;
+  background: #fff;
+}
+
+.nameFilterInput:focus,
+.selectFilter:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.tableContainer {
+  margin-top: 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+  overflow: visible;
+  position: relative;
+}
+
+.tableScroll {
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 920px;
+}
+
+.table th {
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 12px;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.table td {
+  border-bottom: 1px solid #eef2f7;
+  padding: 14px;
+  font-size: 14px;
+  vertical-align: top;
+}
+
+.statusPill {
+  display: inline-block;
+  background: #ecfdf5;
+  color: #10b981;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.cargoBadge {
+  display: inline-block;
+  background: #eff6ff;
+  color: #2563eb;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.actionMenu {
+  position: relative;
+  display: inline-block;
+  z-index: 200;
+}
+
+.actionBtn {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  color: #64748b;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+}
+
+.actionBtn:hover {
+  background: #f1f5f9;
+}
+
+.actionDropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  bottom: auto;
+  width: 220px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: all 0.2s;
+  z-index: 220;
+}
+
+.actionDropdownUp {
+  top: auto;
+  bottom: calc(100% + 8px);
+  transform: translateY(6px);
+}
+
+.actionDropdownOpen {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  z-index: 240;
+}
+
+.actionDropdownFloating {
+  position: fixed;
+  width: 220px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.2);
+  z-index: 4000;
+  transform: translateX(-100%);
+  overflow: hidden;
+}
+
+.actionDropdownFloatingUp {
+  transform: translate(-100%, -100%);
+}
+
+.actionItem {
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #1e293b;
+}
+
+.actionItem:hover {
+  background: #f8fafc;
+}
+
+.actionItemAdmin:hover {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.actionItemSuspend:hover,
+.actionItemDelete:hover {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.emptyCell {
+  text-align: center;
+  color: #64748b;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modalContainer {
+  width: min(760px, 94vw);
+  max-height: 90vh;
+  overflow: auto;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.modalHeader h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.modalClose {
+  border: none;
+  background: #f1f5f9;
+  border-radius: 8px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  color: #1e293b;
+}
+
+.modalForm {
+  padding: 18px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formGroup label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.formGroup input,
+.formGroup select {
+  height: 38px;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+.formDivider {
+  margin: 16px 0 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.formActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.btnCancel,
+.btnSubmit {
+  flex: 1;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btnCancel {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.btnSubmit {
+  background: #2563eb;
+  color: #fff;
+}
+
+@media (max-width: 1320px) {
+  .filterSection {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .filterLabel,
+  .nameFilterInput,
+  .selectFilter {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 1100px) {
+  .dashboardMain {
+    margin-left: 0;
+    padding: 86px 16px 24px;
+  }
+
+  .headerRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .headerActions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 760px) {
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+
+  .modalForm {
+    padding: 14px;
+  }
+}
