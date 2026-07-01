@@ -9,6 +9,7 @@ import Terms from './components/pages/Terms';
 import Lgpd from './components/pages/Lgpd';
 import Cookies from './components/pages/Cookies';
 import Cadastro from './components/pages/Cadastro';
+import Login from './components/pages/Login';
 
 export function AppRoutes() {
   return (
@@ -57,6 +58,7 @@ export function AppRoutes() {
         />
 
         <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );

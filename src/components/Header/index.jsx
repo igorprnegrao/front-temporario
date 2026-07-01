@@ -58,7 +58,11 @@ export default function Header() {
           >
             Planos
           </a>
-          <a href="#" className={styles.navLogin} onClick={handleCloseMenu}>
+          <a
+            href="/login"
+            className={styles.navLogin}
+            onClick={handleCloseMenu}
+          >
             Login
           </a>
           <a
