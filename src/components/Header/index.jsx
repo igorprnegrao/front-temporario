@@ -61,7 +61,11 @@ export default function Header() {
           <a href="#" className={styles.navLogin} onClick={handleCloseMenu}>
             Login
           </a>
-          <a href="#" className={styles.navLink} onClick={handleCloseMenu}>
+          <a
+            href="/cadastro"
+            className={styles.navLink}
+            onClick={handleCloseMenu}
+          >
             Cadastre-se
           </a>
         </nav>

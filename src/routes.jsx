@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import Terms from './components/pages/Terms';
 import Lgpd from './components/pages/Lgpd';
 import Cookies from './components/pages/Cookies';
+import Cadastro from './components/pages/Cadastro';
 
 export function AppRoutes() {
   return (
@@ -54,6 +55,8 @@ export function AppRoutes() {
           </>
         }
         />
+
+        <Route path="/cadastro" element={<Cadastro />} />
       </Routes>
     </Router>
   );
